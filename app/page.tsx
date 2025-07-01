@@ -484,11 +484,11 @@ export default function Home() {
             {/* Form */}
             <div className="md:w-1/2 p-10">
               <h2 className="text-3xl font-bold text-gray-800 mb-2">Get in Touch</h2>
-              <p className="text-gray-600 mb-8">Fill out the form and we'll get back to you soon</p>
+              <p className="text-gray-600 mb-8">Fill out the form and we&apos;ll get back to you soon</p>
               
               {submitStatus === 'success' && (
                 <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
-                  Thank you! Your message has been sent successfully. We'll contact you soon.
+                  Thank you! Your message has been sent successfully. We&apos;ll contact you soon.
                 </div>
               )}
               
