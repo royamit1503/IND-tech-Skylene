@@ -43,7 +43,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="py-20 px-6 md:px-0 xl:w-3/5 2xl:w-[68%] mx-auto">
+    <section className="py-20 px-6 md:px-0 xl:w-2/5 2xl:w-[68%] mx-auto">
       <div className="bg-white rounded-xl shadow-xl overflow-hidden">
         <div className="md:flex">
           {/* Form Illustration */}
