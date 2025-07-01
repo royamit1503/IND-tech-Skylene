@@ -3,6 +3,7 @@ import Footer from "@/components/footer";
 import WordFadeIn from "@/components/magicui/word-fade-in";
 import ShowcaseNavbar from "@/components/showcase-navbar";
 import LetsMakeThingsHappenSection from "@/components/ui/lets-make-things-happen";
+import ContactForm from "@/components/ContactForm";
 import { ArrowDown } from "lucide-react";
 
 const Showcase = () => {
@@ -38,6 +39,11 @@ const Showcase = () => {
         {/* CTA Section */}
         <div className="py-20">
           <LetsMakeThingsHappenSection />
+        </div>
+
+        {/* Contact Form Section */}
+        <div className="py-16">
+          <ContactForm />
         </div>
       </section>
 

@@ -40,8 +40,7 @@ const WhatsAppButton = () => {
       </svg>
     </a>
   );
-};
-
+}
 
 const services = [
   {
@@ -113,6 +112,55 @@ function NumberTicker({ value }: { value: number }) {
 }
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="relative min-h-screen w-full">
       {/* WhatsApp Button */}
@@ -132,72 +180,70 @@ export default function Home() {
       </div>
       
       {/* Navbar */}
-      {/* Navbar */}
-<Element
-  name="top"
-  className="overflow-hidden rounded-[6px] top-3 sticky md:mx-auto z-50 
-  xl:w-4/5 2xl:w-[68%] bg-blue-50 flex items-center 
-  justify-between py-3 px-4 md:px-8 mx-4 border border-gray-200"
->
-  <Link href={"/"} className="ml-2 md:ml-20"> {/* Added margin classes here */}
-    <Image
-      src={"/logo/logo.webp"}
-      alt="Logo"
-      width={1000}
-      height={1000}
-      className="w-24"
-    />
-  </Link>
-
-  {/* Rest of the navbar code remains the same */}
-  <div className="absolute right-1/2 translate-x-1/2 transform">
-    <div className="hidden md:flex gap-x-8 items-center text-gray-700 font-medium text-md cursor-pointer">
-      <Link href={"/showcase"} className="hover:text-blue-600">
-        Projects
-      </Link>
-      <ScrollLink 
-        to="services" 
-        smooth={true} 
-        duration={500} 
-        className="hover:text-blue-600 cursor-pointer"
+      <Element
+        name="top"
+        className="overflow-hidden rounded-[6px] top-3 sticky md:mx-auto z-50 
+        xl:w-4/5 2xl:w-[68%] bg-blue-50 flex items-center 
+        justify-between py-3 px-4 md:px-8 mx-4 border border-gray-200"
       >
-        Services
-      </ScrollLink>
-      <ScrollLink 
-        to="process" 
-        smooth={true} 
-        duration={500} 
-        className="hover:text-blue-600 cursor-pointer"
-      >
-        Process
-      </ScrollLink>
-      <ScrollLink 
-        to="guarentees" 
-        smooth={true} 
-        duration={500} 
-        className="hover:text-blue-600 cursor-pointer"
-      >
-        Guarantees
-      </ScrollLink>
-    </div>
-  </div>
+        <Link href={"/"} className="ml-2 md:ml-20">
+          <Image
+            src={"/logo/logo.webp"}
+            alt="Logo"
+            width={1000}
+            height={1000}
+            className="w-24"
+          />
+        </Link>
 
-  <div className="flex items-center gap-x-3">
-    <a href="tel:9508260355" className="hidden lg:flex">
-      <button className="px-3 py-1 rounded-md flex items-center gap-x-2 hover:text-blue-600 text-sm">
-        9508260355
-      </button>
-    </a>
+        <div className="absolute right-1/2 translate-x-1/2 transform">
+          <div className="hidden md:flex gap-x-8 items-center text-gray-700 font-medium text-md cursor-pointer">
+            <Link href={"/showcase"} className="hover:text-blue-600">
+              Projects
+            </Link>
+            <ScrollLink 
+              to="services" 
+              smooth={true} 
+              duration={500} 
+              className="hover:text-blue-600 cursor-pointer"
+            >
+              Services
+            </ScrollLink>
+            <ScrollLink 
+              to="process" 
+              smooth={true} 
+              duration={500} 
+              className="hover:text-blue-600 cursor-pointer"
+            >
+              Process
+            </ScrollLink>
+            <ScrollLink 
+              to="guarentees" 
+              smooth={true} 
+              duration={500} 
+              className="hover:text-blue-600 cursor-pointer"
+            >
+              Guarantees
+            </ScrollLink>
+          </div>
+        </div>
 
-    <Link
-      href={"/meeting"}
-      className="py-2 px-4 text-sm hover:bg-blue-100 rounded-[4px]
-      border border-blue-500 text-blue-600 bg-white transition duration-200"
-    >
-      Book a call
-    </Link>
-  </div>
-</Element>
+        <div className="flex items-center gap-x-3">
+          <a href="tel:9508260355" className="hidden lg:flex">
+            <button className="px-3 py-1 rounded-md flex items-center gap-x-2 hover:text-blue-600 text-sm">
+              9508260355
+            </button>
+          </a>
+
+          <Link
+            href={"/meeting"}
+            className="py-2 px-4 text-sm hover:bg-blue-100 rounded-[4px]
+            border border-blue-500 text-blue-600 bg-white transition duration-200"
+          >
+            Book a call
+          </Link>
+        </div>
+      </Element>
 
       <main className="md:pb-10">
         <div className="md:px-0 mx-6 xl:w-4/5 2xl:w-[68%] md:mx-auto mt-14">
@@ -286,36 +332,36 @@ export default function Home() {
           </div>
 
           <div className="max-w-6xl mx-auto px-4">
-  <div className="md:flex items-center justify-center gap-y-4 my-10 gap-x-28">
-    <div className="md:w-2/5 text-center md:text-left">
-      <h1 className="text-2xl font-medium text-gray-600 md:w-4/5 mx-auto md:mx-0 transition-all duration-300 hover:text-blue-500 hover:scale-105">
-        Trusted by fast moving brands worldwide
-      </h1>
+            <div className="md:flex items-center justify-center gap-y-4 my-10 gap-x-28">
+              <div className="md:w-2/5 text-center md:text-left">
+                <h1 className="text-2xl font-medium text-gray-600 md:w-4/5 mx-auto md:mx-0 transition-all duration-300 hover:text-blue-500 hover:scale-105">
+                  Trusted by fast moving brands worldwide
+                </h1>
 
-      <div className="flex items-center justify-center md:justify-start gap-4 my-6 group">
-        <div className="text-4xl font-bold text-blue-500 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110">
-          <NumberTicker value={100} />+
+                <div className="flex items-center justify-center md:justify-start gap-4 my-6 group">
+                  <div className="text-4xl font-bold text-blue-500 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110">
+                    <NumberTicker value={100} />+
+                  </div>
+                  <div className="text-gray-500 transition-all duration-300 group-hover:text-gray-700 group-hover:font-medium">
+                    Happy Clients
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="text-gray-500 transition-all duration-300 group-hover:text-gray-700 group-hover:font-medium">
-          Happy Clients
-        </div>
-      </div>
-    </div>
-  </div>
- </div>
- </div>
- </main>
+      </main>
 
       <Element name="services">
         <div className="md:px-0 mx-6 xl:w-4/5 2xl:w-[68%] md:mx-auto ">
-        <h1>
-          <WordPullUpDemo />
-        </h1>
-        <p className="md:text-center py-4 md:w-1/2 mx-auto text-xl md:text-2xl text-gray-500">
-        All of our services are designed to help your business stand out 
-        </p>
+          <h1>
+            <WordPullUpDemo />
+          </h1>
+          <p className="md:text-center py-4 md:w-1/2 mx-auto text-xl md:text-2xl text-gray-500">
+            All of our services are designed to help your business stand out 
+          </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
             {services.map((service) => (
               <div
                 key={service.title}
@@ -342,8 +388,8 @@ export default function Home() {
 
       <Element name="process">
         <main className="md:px-0 mx-6 md:mx-auto">
-        <h1 className="text-3xl md:text-5xl md:text-center font-medium flex items-center gap-x-2 mx-auto justify-center">
-        Our{" "}
+          <h1 className="text-3xl md:text-5xl md:text-center font-medium flex items-center gap-x-2 mx-auto justify-center">
+            Our{" "}
             <span className="text-blue-500 flex gap-x-1 items-center">
               {" "}
               <Image
@@ -373,25 +419,23 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col md:flex-row items-center justify-center w-full md:w-1/2 mx-auto">
-          <div className="w-full md:w-1/2 order-2 md:order-1">
-            <AnimatedBeamMultipleOutputDemo />
+            <div className="w-full md:w-1/2 order-2 md:order-1">
+              <AnimatedBeamMultipleOutputDemo />
+            </div>
+            <div className="w-full md:w-1/2 order-1 md:order-2 md:ml-0">
+              <BoxRevealDemo />
+            </div>
           </div>
-          <div className="w-full md:w-1/2 order-1 md:order-2 md:ml-0">
-            <BoxRevealDemo />
-          </div>
-
-          </div>
-
         </main>
       </Element>
 
       <section>
         <main className="md:flex items-center justify-center space-y-6 md:space-y-0 md:gap-x-20 xl:w-4/5 2xl:w-[68%] mx-auto px-6 md:px-0">
           <Image
-              src="/logo/Amit.jpg" // अपना नया URL डालें
-              width={500}  // सही फॉरमैट (कोष्ठक और px वैल्यू)
+              src="/logo/Amit.jpg"
+              width={500}
               height={500}
-              className="md:w-1/3 rounded-md"  // 'u-' से 'w-' में बदलें
+              className="md:w-1/3 rounded-md"
               alt="Amit Kumar Ray"
           />
           <div className="flex flex-col gap-y-5 md:w-1/2">
@@ -419,7 +463,118 @@ export default function Home() {
       </Element>
 
       <section className="my-10 md:py-20 xl:w-4/5 2xl:w-[68%] md:mx-auto">
-      <LetsMakeThingsHappenSection />
+        <LetsMakeThingsHappenSection />
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="py-20 px-6 md:px-0 xl:w-4/5 2xl:w-[68%] mx-auto">
+        <div className="bg-white rounded-xl shadow-xl overflow-hidden">
+          <div className="md:flex">
+            {/* Form Illustration */}
+            <div className="md:w-1/2 bg-blue-50 p-10 flex items-center justify-center">
+              <Image
+                src="/images/contact-form.png"
+                width={500}
+                height={500}
+                alt="Contact us"
+                className="w-full h-auto max-w-md"
+              />
+            </div>
+            
+            {/* Form */}
+            <div className="md:w-1/2 p-10">
+              <h2 className="text-3xl font-bold text-gray-800 mb-2">Get in Touch</h2>
+              <p className="text-gray-600 mb-8">Fill out the form and we'll get back to you soon</p>
+              
+              {submitStatus === 'success' && (
+                <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
+                  Thank you! Your message has been sent successfully. We'll contact you soon.
+                </div>
+              )}
+              
+              {submitStatus === 'error' && (
+                <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
+                  There was an error submitting your form. Please try again or contact us directly.
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    placeholder="+91 1234567890"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                    Your Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={4}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                    placeholder="Tell us about your project..."
+                  ></textarea>
+                </div>
+
+                <div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </section>
 
       <footer className="py-12 px-6 md:px-0 relative overflow-hidden">
