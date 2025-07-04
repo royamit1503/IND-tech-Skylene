@@ -15,11 +15,12 @@ import { Link as ScrollLink, Element } from "react-scroll";
 import { IconStarFilled } from "@tabler/icons-react";
 import { ShootingStarsAndStarsBackgroundDemo } from "@/components/demos/shooting-stars-demo";
 import LetsMakeThingsHappenSection from "@/components/ui/lets-make-things-happen";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const WhatsAppButton = () => {
   const phoneNumber = "919508260355";
-  const message = "Hello, I'm interested in your services! plss provide me more details about it";
+  const message =
+    "Hello, I'm interested in your services! plss provide me more details about it";
 
   return (
     <a
@@ -40,44 +41,44 @@ const WhatsAppButton = () => {
       </svg>
     </a>
   );
-}
+};
 
 const services = [
   {
     icon: "/images/s_6.png",
-    title: "Web Design + Development",
+    title: "Website Design & Development",
     description:
-      "Take your business to the next level with our web design and development services",
+      "We build beautiful, fast, and mobile-friendly websites that help your business stand out online.",
   },
   {
     icon: "/images/s_1.png",
-    title: "Search Engine Optimization",
+    title: "Search Engine Optimization (SEO)",
     description:
-      "Get your website to the top of search engine results with our SEO services",
+      "Get found on Google and bring more people to your website with our smart SEO solutions.",
   },
   {
     icon: "/images/s_5.png",
     title: "Content Creation",
     description:
-      "Boost your brand's online presence with our social media marketing services",
+      "We create content — blogs, visuals & social posts — that truly speak to your audience.",
   },
   {
     icon: "/images/s_3.png",
     title: "Social Media Marketing",
     description:
-      "Interact with your customers and increase sales with our email marketing services",
+      "Let’s turn your followers into loyal customers with engaging posts and smart social campaigns.",
   },
   {
     icon: "/images/s_4.png",
     title: "Email Marketing",
     description:
-      "With our content creation services, we help businesses drive results",
+      "Send emails people love opening — and watch engagement and sales grow.",
   },
   {
     icon: "/images/s_2.png",
-    title: "Pay-Per-Click Advertising",
+    title: "PPC Advertising",
     description:
-      "Don't waste money on ineffective advertising. Our PPC services help you reach your target audience",
+      "Reach the right people fast and make every click count with our targeted ad strategies.",
   },
 ];
 
@@ -87,20 +88,20 @@ function NumberTicker({ value }: { value: number }) {
   useEffect(() => {
     const duration = 2000; // Animation duration in ms
     const startTime = Date.now();
-    
+
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const easedProgress = easeOutQuad(progress);
       const newValue = Math.floor(easedProgress * value);
-      
+
       setCurrentValue(newValue);
-      
+
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
     };
-    
+
     requestAnimationFrame(animate);
   }, [value]);
 
@@ -113,19 +114,23 @@ function NumberTicker({ value }: { value: number }) {
 
 export default function Home() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
+  const [submitStatus, setSubmitStatus] = useState<null | "success" | "error">(
+    null
+  );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -135,27 +140,27 @@ export default function Home() {
     setSubmitStatus(null);
 
     try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
+      const response = await fetch("/api/send-email", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setSubmitStatus('success');
+        setSubmitStatus("success");
         setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          message: ''
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
         });
       } else {
-        setSubmitStatus('error');
+        setSubmitStatus("error");
       }
     } catch (error) {
-      setSubmitStatus('error');
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -165,7 +170,7 @@ export default function Home() {
     <div className="relative min-h-screen w-full">
       {/* WhatsApp Button */}
       <WhatsAppButton />
-      
+
       {/* Background Image */}
       <div className="fixed inset-0 -z-50">
         <Image
@@ -178,70 +183,76 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-black/20"></div>
       </div>
-      
+
       {/* Navbar */}
       <Element
         name="top"
-        className="overflow-hidden rounded-[6px] top-3 sticky md:mx-auto z-50 
-        xl:w-4/5 2xl:w-[68%] bg-blue-50 flex items-center 
-        justify-between py-3 px-4 md:px-8 mx-4 border border-gray-200"
+        className="sticky top-3 z-50 mx-4 md:mx-auto xl:w-4/5 2xl:w-[68%] 
+    bg-blue-50/70 backdrop-blur-sm border border-blue-100 shadow-lg 
+    rounded-xl transition-all duration-300"
       >
-        <Link href={"/"} className="ml-2 md:ml-20">
-          <Image
-            src={"/logo/logo.webp"}
-            alt="Logo"
-            width={1000}
-            height={1000}
-            className="w-24"
-          />
-        </Link>
+        <div className="flex items-center justify-between px-4 md:px-8 py-3">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/logo/logo.webp"
+              alt="Logo"
+              width={1000}
+              height={1000}
+              className="w-24"
+            />
+          </Link>
 
-        <div className="absolute right-1/2 translate-x-1/2 transform">
-          <div className="hidden md:flex gap-x-8 items-center text-gray-700 font-medium text-md cursor-pointer">
-            <Link href={"/showcase"} className="hover:text-blue-600">
+          {/* Center Navigation */}
+          <div className="hidden md:flex gap-x-10 text-gray-700 font-medium text-[15px]">
+            <Link
+              href="/showcase"
+              className="hover:text-blue-600 hover:scale-105 transition-all duration-300"
+            >
               Projects
             </Link>
-            <ScrollLink 
-              to="services" 
-              smooth={true} 
-              duration={500} 
-              className="hover:text-blue-600 cursor-pointer"
+            <ScrollLink
+              to="services"
+              smooth={true}
+              duration={500}
+              className="hover:text-blue-600 hover:scale-105 transition-all duration-300 cursor-pointer"
             >
-              Services
+              What We Do
             </ScrollLink>
-            <ScrollLink 
-              to="process" 
-              smooth={true} 
-              duration={500} 
-              className="hover:text-blue-600 cursor-pointer"
+            <ScrollLink
+              to="process"
+              smooth={true}
+              duration={500}
+              className="hover:text-blue-600 hover:scale-105 transition-all duration-300 cursor-pointer"
             >
-              Process
+              Our Approach
             </ScrollLink>
-            <ScrollLink 
-              to="guarentees" 
-              smooth={true} 
-              duration={500} 
-              className="hover:text-blue-600 cursor-pointer"
+            <ScrollLink
+              to="guarentees"
+              smooth={true}
+              duration={500}
+              className="hover:text-blue-600 hover:scale-105 transition-all duration-300 cursor-pointer"
             >
-              Guarantees
+              Our Promise
             </ScrollLink>
           </div>
-        </div>
 
-        <div className="flex items-center gap-x-3">
-          <a href="tel:9508260355" className="hidden lg:flex">
-            <button className="px-3 py-1 rounded-md flex items-center gap-x-2 hover:text-blue-600 text-sm">
-              9508260355
-            </button>
-          </a>
+          {/* Right Section */}
+          <div className="flex items-center gap-x-4">
+            <a href="tel:9508260355" className="hidden lg:flex">
+              <button className="text-sm font-medium text-gray-700 hover:text-blue-600 transition duration-300">
+                9508260355
+              </button>
+            </a>
 
-          <Link
-            href={"/meeting"}
-            className="py-2 px-4 text-sm hover:bg-blue-100 rounded-[4px]
-            border border-blue-500 text-blue-600 bg-white transition duration-200"
-          >
-            Book a call
-          </Link>
+            <Link
+              href="/meeting"
+              className="py-2 px-4 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 
+        rounded-md shadow-sm hover:shadow-md transition-all duration-300"
+            >
+              Talk With Us
+            </Link>
+          </div>
         </div>
       </Element>
 
@@ -256,8 +267,8 @@ export default function Home() {
             className="md:text-center
            text-xl md:text-2xl my-6 md:my-10 md:w-4/5 mx-auto text-gray-500"
           >
-            Schedule a call with us to discuss your project and get a quote in
-            minutes
+            Share your vision — we’ll shape it into a plan with pricing in
+            minutes.
           </p>
 
           <div
@@ -272,20 +283,9 @@ export default function Home() {
               href="/meeting"
               className="py-3 
             px-10
-            md:px-16
-      md:text-xl
-      hover:bg-[#abcbff] 
-      rounded-[6px]
-      border-2 
-      border-black 
-      dark:border-white 
-       bg-[#121212] 
-       text-white 
-       transition 
-       duration-200 
-       hover:shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,0,0),5px_5px_0px_0px_rgba(0,0,0)] dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,255),3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)] "
+            md:px-16 md:text-xl hover:bg-[#abcbff]  rounded-[6px] border-2  border-black  dark:border-white   bg-[#121212]   text-white   transition   duration-200   hover:shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,5px_5px_0px_0px_rgba(0,0,0)] dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)] "
             >
-              Book a Call
+              Connect & Create
             </Link>
             <Link
               href={"/showcase"}
@@ -300,7 +300,7 @@ export default function Home() {
         rounded-[6px]
         hover:shadow-[1px_1px_rgba(0,0,0),2px_2px_rgba(0,0,0),3px_3px_rgba(0,0,0),4px_4px_rgba(0,0,0),5px_5px_0px_0px_rgba(0,0,0)] dark:shadow-[1px_1px_rgba(255,255,255),2px_2px_rgba(255,255,255),3px_3px_rgba(255,255,255),4px_4px_rgba(255,255,255),5px_5px_0px_0px_rgba(255,255,255)]"
             >
-              Showcase
+              Digital Journey
             </Link>
           </div>
 
@@ -335,12 +335,12 @@ export default function Home() {
             <div className="md:flex items-center justify-center gap-y-4 my-10 gap-x-28">
               <div className="md:w-2/5 text-center md:text-left">
                 <h1 className="text-2xl font-medium text-gray-600 md:w-4/5 mx-auto md:mx-0 transition-all duration-300 hover:text-blue-500 hover:scale-105">
-                  Trusted by fast moving brands worldwide
+                  Helping ambitious brands scale smarter, faster
                 </h1>
 
                 <div className="flex items-center justify-center md:justify-start gap-4 my-6 group">
                   <div className="text-4xl font-bold text-blue-500 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110">
-                    <NumberTicker value={100} />+
+                    <NumberTicker value={10} />+
                   </div>
                   <div className="text-gray-500 transition-all duration-300 group-hover:text-gray-700 group-hover:font-medium">
                     Happy Clients
@@ -358,7 +358,7 @@ export default function Home() {
             <WordPullUpDemo />
           </h1>
           <p className="md:text-center py-4 md:w-1/2 mx-auto text-xl md:text-2xl text-gray-500">
-            All of our services are designed to help your business stand out 
+            Designed with one goal — making your business stand out.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
@@ -389,7 +389,7 @@ export default function Home() {
       <Element name="process">
         <main className="md:px-0 mx-6 md:mx-auto">
           <h1 className="text-3xl md:text-5xl md:text-center font-medium flex items-center gap-x-2 mx-auto justify-center">
-            Our{" "}
+            From{" "}
             <span className="text-blue-500 flex gap-x-1 items-center">
               {" "}
               <Image
@@ -399,7 +399,7 @@ export default function Home() {
                 className="w-6"
                 alt="image"
               />
-              Creative
+              Vision to
               <Image
                 src={"/icons/star.svg"}
                 width={10000}
@@ -408,14 +408,15 @@ export default function Home() {
                 alt="image"
               />
             </span>{" "}
-            Process
+            Reality
           </h1>
 
-          <p className="text-center 
+          <p
+            className="text-center 
           py-4 md:w-1/2 mx-auto 
-          text-xl md:text-2xl text-gray-500">
-            All of our services are designed to help your business to get
-            noticed.
+          text-xl md:text-2xl text-gray-500"
+          >
+            Everything we do is focused on making your brand more visible.
           </p>
 
           <div className="flex flex-col md:flex-row items-center justify-center w-full md:w-1/2 mx-auto">
@@ -432,15 +433,19 @@ export default function Home() {
       <section>
         <main className="md:flex items-center justify-center space-y-6 md:space-y-0 md:gap-x-20 xl:w-4/5 2xl:w-[68%] mx-auto px-6 md:px-0">
           <Image
-              src="/logo/Amit.jpg"
-              width={500}
-              height={500}
-              className="md:w-1/3 rounded-md"
-              alt="Amit Kumar Ray"
+            src="/Images/Amit.jpg"
+            width={500}
+            height={500}
+            className="md:w-1/3 rounded-md"
+            alt="Amit Kumar Ray"
           />
           <div className="flex flex-col gap-y-5 md:w-1/2">
             <h1 className="text-lg md:text-2xl ">
-              &quot;I am Amit Kumar Ray, a BCA student at Vestor College, Patna. I interned at UPTOSKILLS, working on real-world projects that sharpened my skills. Now, as a founder, I blend my academic learning and hands-on experience to build impactful digital solutions.. &quot;
+              &quot;I am Amit Kumar Ray, a BCA student at Vestor College, Patna.
+              I interned at UPTOSKILLS, working on real-world projects that
+              sharpened my skills. Now, as a founder, I blend my academic
+              learning and hands-on experience to build impactful digital
+              solutions.. &quot;
             </h1>
             <div className="flex items-center gap-x-1">
               <IconStarFilled className="text-4xl text-yellow-500" />
@@ -480,27 +485,44 @@ export default function Home() {
                 className="w-full h-auto max-w-md"
               />
             </div>
-            
+
             {/* Form */}
             <div className="md:w-1/2 p-10">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Get in Touch</h2>
-              <p className="text-gray-600 mb-8">Fill out the form and we&apos;ll get back to you soon</p>
-              
-              {submitStatus === 'success' && (
+              <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                Get in Touch
+              </h2>
+              <p className="text-gray-600 mb-8">
+                Fill out the form and we&apos;ll get back to you soon
+              </p>
+
+              {submitStatus === "success" && (
                 <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
-                  Thank you! Your message has been sent successfully. We&apos;ll contact you soon.
-                </div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
-                  There was an error submitting your form. Please try again or contact us directly.
+                  Thank you! Your message has been sent successfully. We&apos;ll
+                  contact you soon.
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {submitStatus === "error" && (
+                <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-lg">
+                  There was an error submitting your form. Please try again or
+                  contact us directly.
+                </div>
+              )}
+
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6 bg-white/70 backdrop-blur-md p-8 rounded-xl shadow-lg border border-blue-100"
+              >
+                <h3 className="text-xl font-semibold text-gray-800 text-center mb-4">
+                  Let's Build Something Great Together 🚀
+                </h3>
+
+                {/* Full Name */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Full Name
                   </label>
                   <input
@@ -510,13 +532,17 @@ export default function Home() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                    placeholder="Your name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-gray-400"
+                    placeholder="e.g. Amit Roy"
                   />
                 </div>
 
+                {/* Email */}
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Email Address
                   </label>
                   <input
@@ -526,13 +552,17 @@ export default function Home() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                    placeholder="your.email@example.com"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-gray-400"
+                    placeholder="e.g. you@example.com"
                   />
                 </div>
 
+                {/* Phone */}
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Phone Number
                   </label>
                   <input
@@ -541,13 +571,17 @@ export default function Home() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                    placeholder="+91 1234567890"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-gray-400"
+                    placeholder="+91 9876543210"
                   />
                 </div>
 
+                {/* Message */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Your Message
                   </label>
                   <textarea
@@ -557,18 +591,21 @@ export default function Home() {
                     onChange={handleChange}
                     required
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                    placeholder="Tell us about your project..."
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition placeholder-gray-400"
+                    placeholder="Tell us a bit about your project, idea or goal..."
                   ></textarea>
                 </div>
 
+                {/* Submit */}
                 <div>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    className={`w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-300 transform hover:scale-[1.02] shadow-md ${
+                      isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
                   >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </div>
               </form>
@@ -602,37 +639,107 @@ export default function Home() {
                   alt="Company Logo"
                 />
               </div>
-              <p className="text-white/90">Helping businesses grow through Skylene</p>
-              
+              <p className="text-white/90">
+                Driving Growth. Delivering Impact. Powered by Skylene
+              </p>
+
               {/* Social Media Icons */}
               <div className="flex gap-4 mt-2">
                 {[
-                  { 
+                  {
                     name: "Instagram",
-                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>,
-                    url: "https://www.instagram.com/skylene_official?igsh=bzhqaWhhb2psZHRj"
+                    icon: (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <rect
+                          x="2"
+                          y="2"
+                          width="20"
+                          height="20"
+                          rx="5"
+                          ry="5"
+                        ></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                    ),
+                    url: "https://www.instagram.com/skylene_official?igsh=bzhqaWhhb2psZHRj",
                   },
                   {
                     name: "Facebook",
-                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>,
-                    url: "https://www.facebook.com/share/1FGMhqeT7c/"
+                    icon: (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                      </svg>
+                    ),
+                    url: "https://www.facebook.com/share/1FGMhqeT7c/",
                   },
                   {
                     name: "LinkedIn",
-                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>,
-                    url: "https://www.linkedin.com/in/amit-kumar-rayhw?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    icon: (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                        <rect x="2" y="9" width="4" height="12"></rect>
+                        <circle cx="4" cy="4" r="2"></circle>
+                      </svg>
+                    ),
+                    url: "https://www.linkedin.com/in/amit-kumar-rayhw?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
                   },
                   {
                     name: "Email",
-                    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>,
-                    url: "mailto:amitkumar9304730@gmail.com"
-                  }
+                    icon: (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                    ),
+                    url: "mailto:amitkumar9304730@gmail.com",
+                  },
                 ].map((social) => (
-                  <a 
+                  <a
                     key={social.name}
-                    href={social.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-2 bg-white/10 rounded-full hover:bg-white/20 hover:scale-110 transition-all duration-300 group"
                     aria-label={social.name}
                   >
@@ -646,10 +753,12 @@ export default function Home() {
 
             {/* Quick Links */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-white">Quick Links</h3>
+              <h3 className="text-lg font-semibold mb-4 text-white">
+                Quick Links
+              </h3>
               <ul className="space-y-3">
                 <li>
-                  <Link 
+                  <Link
                     href="/"
                     className="block py-1.5 text-white/80 hover:text-blue-300 hover:pl-2 transition-all duration-300 border-l-2 border-transparent hover:border-blue-400"
                   >
@@ -657,7 +766,7 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <Link 
+                  <Link
                     href="/showcase"
                     className="block py-1.5 text-white/80 hover:text-blue-300 hover:pl-2 transition-all duration-300 border-l-2 border-transparent hover:border-blue-400"
                   >
@@ -665,11 +774,11 @@ export default function Home() {
                   </Link>
                 </li>
                 <li>
-                  <button 
+                  <button
                     onClick={() => {
-                      const element = document.getElementById('services');
+                      const element = document.getElementById("services");
                       if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
+                        element.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
                     className="block py-1.5 text-white/80 hover:text-blue-300 hover:pl-2 transition-all duration-300 border-l-2 border-transparent hover:border-blue-400 w-full text-left"
@@ -678,11 +787,11 @@ export default function Home() {
                   </button>
                 </li>
                 <li>
-                  <button 
+                  <button
                     onClick={() => {
-                      const element = document.getElementById('process');
+                      const element = document.getElementById("process");
                       if (element) {
-                        element.scrollIntoView({ behavior: 'smooth' });
+                        element.scrollIntoView({ behavior: "smooth" });
                       }
                     }}
                     className="block py-1.5 text-white/80 hover:text-blue-300 hover:pl-2 transition-all duration-300 border-l-2 border-transparent hover:border-blue-400 w-full text-left"
@@ -695,13 +804,15 @@ export default function Home() {
 
             {/* Services */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-white">Services</h3>
+              <h3 className="text-lg font-semibold mb-4 text-white">
+                Services
+              </h3>
               <ul className="space-y-3">
                 {[
                   "Web Design + Development",
                   "SEO",
                   "Content Creation",
-                  "Social Media Marketing"
+                  "Social Media Marketing",
                 ].map((service) => (
                   <li key={service}>
                     <span className="block py-1.5 text-white/80 hover:text-blue-300 hover:pl-2 transition-all duration-300 border-l-2 border-transparent hover:border-blue-400 cursor-default">
@@ -714,25 +825,47 @@ export default function Home() {
 
             {/* Contact Info */}
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-white">Contact Us</h3>
+              <h3 className="text-lg font-semibold mb-4 text-white">
+                Contact Us
+              </h3>
               <ul className="space-y-3">
                 <li>
-                  <a 
-                    href="tel:9508260355" 
+                  <a
+                    href="tel:9508260355"
                     className="flex items-center gap-3 py-1.5 text-white/80 hover:text-blue-300 hover:pl-2 transition-all duration-300 border-l-2 border-transparent hover:border-blue-400"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
                     <span>9508260355</span>
                   </a>
                 </li>
                 <li>
-                  <a 
-                    href="mailto:amitkumar9304730@gmail.com" 
+                  <a
+                    href="mailto:amitkumar9304730@gmail.com"
                     className="flex items-center gap-3 py-1.5 text-white/80 hover:text-blue-300 hover:pl-2 transition-all duration-300 border-l-2 border-transparent hover:border-blue-400"
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                       <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
@@ -747,14 +880,14 @@ export default function Home() {
           <div className="border-t border-white/20 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center text-white/70">
             <p className="text-sm">© 2025 All Rights Reserved.</p>
             <div className="flex gap-4 mt-4 md:mt-0">
-              <Link 
-                href="/privacy" 
+              <Link
+                href="/privacy"
                 className="text-sm hover:text-blue-300 hover:underline underline-offset-4 decoration-white/30 hover:decoration-blue-300 transition-all duration-300"
               >
                 Privacy Policy
               </Link>
-              <Link 
-                href="/terms" 
+              <Link
+                href="/terms"
                 className="text-sm hover:text-blue-300 hover:underline underline-offset-4 decoration-white/30 hover:decoration-blue-300 transition-all duration-300"
               >
                 Terms of Service

@@ -7,7 +7,6 @@ const BoxRevealDemo = () => {
   return (
     <div className="h-full w-full items-center justify-center ml-10 overflow-hidden pt-8 space-y-2">
       <BoxReveal boxColor={"#3b82f6"} duration={0.5}>
-        
         <p className="text-3xl font-semibold">1. Connect</p>
       </BoxReveal>
 
@@ -26,7 +25,7 @@ const BoxRevealDemo = () => {
 
       <BoxReveal boxColor={"#3b82f6"} duration={0.5}>
         <h2 className="my-2 text-lg text-gray-500">
-          Outline the scope of the project
+          Transform your digital footprint.
         </h2>
       </BoxReveal>
 
