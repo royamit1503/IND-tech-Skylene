@@ -514,7 +514,7 @@ export default function Home() {
                 className="space-y-6 bg-white/70 backdrop-blur-md p-8 rounded-xl shadow-lg border border-blue-100"
               >
                 <h3 className="text-xl font-semibold text-gray-800 text-center mb-4">
-                  Let's Build Something Great Together 🚀
+                  Let &apos; s Build Something Great Together 🚀
                 </h3>
 
                 {/* Full Name */}
