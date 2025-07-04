@@ -433,7 +433,7 @@ export default function Home() {
       <section>
         <main className="md:flex items-center justify-center space-y-6 md:space-y-0 md:gap-x-20 xl:w-4/5 2xl:w-[68%] mx-auto px-6 md:px-0">
           <Image
-            src="/Images/Amit.jpg"
+            src="/logo/Amit.jpg"
             width={500}
             height={500}
             className="md:w-1/3 rounded-md"
