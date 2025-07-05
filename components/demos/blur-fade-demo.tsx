@@ -24,8 +24,8 @@ const works = [
   {
     background: "bg-gray-200",
     imageUrl: "/images/business4.webp.png",
-    title: "Skylene Digital Services",
-    link: "http://localhost:3000/",
+    title: "IND tech Skylene",
+    link: "https://skyleneservices.vercel.app/",
   },
 
 
