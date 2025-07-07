@@ -80,6 +80,24 @@ const services = [
     description:
       "Reach the right people fast and make every click count with our targeted ad strategies.",
   },
+  {
+    icon: "/images/Domain.jpg",
+    title: "Domain Hosting",
+    description:
+      "Claim Your Unique Web Identity. Find your perfect domain with ease.",
+  },
+  {
+    icon: "/images/graphic.png",
+    title: "Graphic Design",
+    description:
+      "See Your Vision Come Alive. We craft stunning designs that speak volumes for your brand.",
+  },
+  {
+    icon: "/images/aimarketing.png",
+    title: "AI Marketing",
+    description:
+      "Unleash Smarter Marketing. Leverage AI to personalize campaigns and maximize your reach.",
+  },
 ];
 
 function NumberTicker({ value }: { value: number }) {
@@ -869,7 +887,7 @@ export default function Home() {
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                       <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
-                    <span>amitkumar9304730@gmail.com</span>
+                    <span>skylene.official.services@gmail.com</span>
                   </a>
                 </li>
               </ul>
