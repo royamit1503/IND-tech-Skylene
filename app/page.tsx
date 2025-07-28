@@ -175,14 +175,18 @@ export default function Home() {
           message: "",
         });
       } else {
+        const errorData = await response.json();
+        console.error("Server error:", errorData);
         setSubmitStatus("error");
       }
     } catch (error) {
+      console.error("Client error:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <div className="relative min-h-screen w-full">
